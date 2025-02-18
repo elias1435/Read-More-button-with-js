@@ -1,4 +1,3 @@
-<script>
 document.addEventListener('DOMContentLoaded', () => {
     // Select all elements with the class '.review-more .elementor-widget-container'
     const descriptions = document.querySelectorAll('.review-more .elementor-widget-container');
@@ -46,4 +45,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-</script>
