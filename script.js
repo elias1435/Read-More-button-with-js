@@ -1,21 +1,24 @@
 <script>
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all elements with the class '.read-more .elementor-icon-box-description'
-    const descriptions = document.querySelectorAll('.read-more .elementor-icon-box-description');
+    // Select all elements with the class '.review-more .elementor-widget-container'
+    const descriptions = document.querySelectorAll('.review-more .elementor-widget-container');
 
     descriptions.forEach((description) => {
         // Create a button dynamically
         const toggleBtn = document.createElement('button');
         toggleBtn.textContent = 'Read More';
         toggleBtn.classList.add('toggle-btn');
-        toggleBtn.style.marginTop = '10px';
-        toggleBtn.style.backgroundColor = '#007bff';
-        toggleBtn.style.color = '#fff';
-        toggleBtn.style.border = 'none';
-        toggleBtn.style.padding = '10px';
-        toggleBtn.style.cursor = 'pointer';
-        toggleBtn.style.borderRadius = '4px';
+        
+        // Button Styles
+        Object.assign(toggleBtn.style, {
+            marginTop: '10px',
+            backgroundColor: '#007bff',
+            color: '#fff',
+            border: 'none',
+            padding: '10px',
+            cursor: 'pointer',
+            borderRadius: '4px'
+        });
 
         // Insert the button after the description
         description.parentNode.insertBefore(toggleBtn, description.nextSibling);
@@ -27,13 +30,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add click event listener to the button
         toggleBtn.addEventListener('click', () => {
-            const isExpanded = description.style.maxHeight !== '60px';
-            description.style.maxHeight = isExpanded ? '60px' : '1000px'; // Expand or collapse
-            toggleBtn.textContent = isExpanded ? 'Read More' : 'Less';
+            const isExpanded = description.classList.contains('expanded');
+
+            if (isExpanded) {
+                description.style.maxHeight = '60px'; // Collapse
+                toggleBtn.textContent = 'Read More';
+                description.classList.remove('expanded');
+                toggleBtn.classList.remove('btn-expand'); // Remove class from button
+            } else {
+                description.style.maxHeight = '1000px'; // Expand
+                toggleBtn.textContent = 'Less';
+                description.classList.add('expanded');
+                toggleBtn.classList.add('btn-expand'); // Add class to button when expanded
+            }
         });
     });
 });
-
-
-
 </script>
